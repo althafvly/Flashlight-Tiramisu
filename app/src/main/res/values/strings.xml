@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flashlight Tiramisu</string>
+    <string name="device_not_supported">Device not supported</string>
 </resources>

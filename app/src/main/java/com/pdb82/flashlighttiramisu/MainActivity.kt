@@ -1,19 +1,16 @@
 package com.pdb82.flashlighttiramisu
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.SeekBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.WindowCompat
+import com.ss.svs.SegmentedVerticalSeekBar
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val seekBar = findViewById<SeekBar>(R.id.seekBar)
+        val seekBar = findViewById<SegmentedVerticalSeekBar>(R.id.seekBar)
         val errorText = findViewById<TextView>(R.id.textView)
         val card = findViewById<CardView>(R.id.card)
 
@@ -39,8 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         if (torchMaxLevel > 1) {
             seekBar.max = torchMaxLevel
-            seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+            seekBar.setOnBoxedPointsChangeListener(object :
+                SegmentedVerticalSeekBar.OnValuesChangeListener {
+                override fun onProgressChanged(
+                    p0: SegmentedVerticalSeekBar?, p1: Int
+                ) {
                     if (p1 == 0) {
                         cameraManager.setTorchMode(outCameraId, false)
                     } else {
@@ -48,16 +48,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onStartTrackingTouch(p0: SeekBar?) {
+                override fun onStartTrackingTouch(p0: SegmentedVerticalSeekBar?) {
                 }
 
-                override fun onStopTrackingTouch(p0: SeekBar?) {
+                override fun onStopTrackingTouch(p0: SegmentedVerticalSeekBar?) {
                 }
+
             })
         } else {
             errorText.visibility = View.VISIBLE
             card.visibility = View.VISIBLE
-            errorText.text = "Device not supported"
+            errorText.text = getString(R.string.device_not_supported)
             seekBar.isEnabled = false
         }
     }

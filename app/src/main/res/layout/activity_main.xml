@@ -25,15 +25,22 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <SeekBar
+    <com.ss.svs.SegmentedVerticalSeekBar
         android:id="@+id/seekBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        app:backgroundColor="@color/color_background"
+        app:cornerRadius="10dp"
+        app:delimiterColor="@color/white"
+        app:isAllRadius="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar_main" />
+        app:layout_constraintTop_toBottomOf="@+id/appbar_main"
+        app:progressColor="@color/color_progress"
+        app:step="1"
+        app:currentValue="0"
+        app:touchDisabled="false" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
